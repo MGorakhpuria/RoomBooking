@@ -1,0 +1,33 @@
+<div class="container">
+  <% if @bookings.present? %>
+    <h1>Listing Bookings</h1>
+
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">Hotel</th>
+        <th scope="col">Room</th>
+        <th scope="col">Status</th>
+        <th scope="col">Check In Date</th>
+        <th scope="col">Check Out Date</th>
+      </tr>
+      </thead>
+
+      <% @bookings.each do |booking| %>
+        <tbody>
+          <tr>
+            <td><%= booking.hotel.name %></td>
+            <td><%= booking.room.room_no %></td>
+            <td><%= booking.status %></td>
+            <td><%= booking.check_in %></td>
+            <td><%= booking.check_out %></td>
+            <td><%= link_to 'Edit', edit_booking_path(booking), class: "btn btn-sm btn-primary" %></td>
+            <td><%= button_to 'Cancel', cancel_booking_path(booking), method: :patch, form:{ data: { turbo_confirm: 'Are you sure?' }} , class: "btn btn-sm btn-primary"%></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  <% else %>
+    <h1>Bookings not created</h1>
+  <% end %>
+</div>

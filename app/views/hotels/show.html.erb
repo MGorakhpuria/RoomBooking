@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <%= image_tag('hotel_image.jpeg') %>
+    </div>
+    <div class="col-md-6">
+      <div>
+        <b><%= @hotel.name %></b>
+        <p><%= @hotel.description %></p>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div>Book Rooms</div>
+  <div>
+    <% @hotel.rooms.each do |room| %>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= room.room_type %></h5>
+          <p class="card-text">Room No. <%= room.room_no %></p>
+          <%= form_with url: bookings_path, method: :post do |f| %>
+            <div class="form-group">
+              <%= f.label :check_in %><br />
+              <%= f.datetime_field :check_in, class: 'form-control' %>
+            </div><br>
+            <div class="form-group">
+              <%= f.label :check_out %><br />
+              <%= f.datetime_field :check_out, class: 'form-control' %>
+            </div><br>
+            <%= f.hidden_field :room_id, value: room.id %>
+            <%= f.hidden_field :hotel_id, value: @hotel.id %>
+            <div class="actions">
+              <%= f.submit "Book", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div><br />
+    <% end %>
+  </div>
+</div>

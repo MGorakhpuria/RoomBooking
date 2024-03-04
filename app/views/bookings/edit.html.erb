@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><%= @booking.room.room_type %></h5>
+      <p class="card-text">Room No. <%= @booking.room.room_no %></p>
+      <%= form_for([@booking]) do |f| %>
+        <div class="form-group">
+          <%= f.label :check_in %><br />
+          <%= f.datetime_field :check_in, class: 'form-control' %>
+        </div><br>
+        <div class="form-group">
+          <%= f.label :check_out %><br />
+          <%= f.datetime_field :check_out, class: 'form-control' %>
+        </div><br>
+
+        <div class="actions">
+          <%= f.submit class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div><br />
+</div>

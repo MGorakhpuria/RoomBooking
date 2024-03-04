@@ -1,0 +1,39 @@
+<div class="container">
+  <h1>Hotels</h1>
+  <div class="row">
+    <div class="col-md-6">
+      
+        <%= form_tag hotels_path, method: :get do %>
+          <%= label_tag :filter %>:
+          <%= select_tag(:state, options_for_select([["Madhya Pradesh"],["Maharashtra"],["Delhi"]], params[:option] ), include_blank: true, prompt: "Select state", class:"select") %>
+
+          <%= submit_tag "Submit", class: "btn btn-sm btn-primary" %>
+        <% end %>
+      
+    </div>
+    <div class="col-md-6">
+      <%= link_to 'Your Bookings', bookings_path, class: "btn btn-sm btn-primary float-end" %>
+    </div>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">State</th>
+        <th scope="col">City</th>
+      </tr>
+      </thead>
+
+    <% @hotels.each do |hotel| %>
+      <tbody>
+        <tr>
+          <td><%= hotel.name %></td>
+          <td><%= hotel.state %></td>
+          <td><%= hotel.city %></td>
+          <td><%= link_to 'Show', [hotel], class: "btn btn-sm btn-primary" %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+</div>
